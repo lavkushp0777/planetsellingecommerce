@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Planet Shop - Your Gateway to the Universe</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #00bfff;
+            --primary-dark: #1e90ff;
+            --background: #0a0a1a;
+            --card-bg: rgba(0, 0, 0, 0.5);
+            --text: #ffffff;
+            --text-secondary: #cccccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: #000;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3);
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(10, 10, 26, 0.9);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-logo h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .cart-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            background: rgba(0, 191, 255, 0.1);
+            border: 1px solid rgba(0, 191, 255, 0.3);
+        }
+
+        /* Page Content */
+        .page-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 160px);
+        }
+
+        /* Home Page */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        /* Planets Section */
+        .planet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .planet-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .planet-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.1);
+        }
+
+        .planet-image {
+            height: 200px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .planet {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .earth-like {
+            background: linear-gradient(135deg, #1e90ff, #00bfff, #87cefa);
+            box-shadow: 0 0 50px rgba(30, 144, 255, 0.6);
+        }
+
+        .gas-giant {
+            background: linear-gradient(135deg, #4169e1, #87ceeb, #b0e0e6);
+            box-shadow: 0 0 50px rgba(65, 105, 225, 0.6);
+        }
+
+        .desert {
+            background: linear-gradient(135deg, #d2b48c, #f5deb3, #cd853f);
+            box-shadow: 0 0 50px rgba(210, 180, 140, 0.6);
+        }
+
+        .ice {
+            background: linear-gradient(135deg, #add8e6, #b0e0e6, #afeeee);
+            box-shadow: 0 0 50px rgba(173, 216, 230, 0.6);
+        }
+
+        .volcanic {
+            background: linear-gradient(135deg, #ff4500, #ff8c00, #ff6347);
+            box-shadow: 0 0 50px rgba(255, 69, 0, 0.6);
+        }
+
+        .jungle {
+            background: linear-gradient(135deg, #2e8b57, #3cb371, #66cdaa);
+            box-shadow: 0 0 50px rgba(46, 139, 87, 0.6);
+        }
+
+        .planet-glow {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), transparent 70%);
+            z-index: 1;
+        }
+
+        .planet-info {
+            padding: 1.5rem;
+        }
+
+        .planet-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .planet-type {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .planet-description {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .planet-specs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .planet-specs span {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .planet-price {
+            margin-bottom: 1.5rem;
+        }
+
+        .planet-price .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .planet-price .currency {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .add-to-cart:hover {
+            background: rgba(0, 191, 255, 0.1);
+        }
+
+        /* About Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: var(--background);
+            margin: 5% auto;
+            padding: 2rem;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 191, 255, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close {
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-item button {
+            background: transparent;
+            border: 1px solid #ff4500;
+            color: #ff4500;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cart-item button:hover {
+            background: rgba(255, 69, 0, 0.1);
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 2rem 0;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .checkout-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Gallery Page Styles */
+        .filter-controls {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: flex-end;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 4px;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            background: var(--primary);
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-planet-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-planet-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-planet-card .planet-image {
+            height: 200px;
+            position: relative;
+        }
+
+        .gallery-planet-card .planet-info {
+            padding: 1.5rem;
+        }
+
+        .planet-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            background: rgba(0, 191, 255, 0.2);
+            color: var(--primary);
+        }
+
+        .tag.habitable {
+            background: rgba(0, 255, 0, 0.2);
+            color: #0f0;
+        }
+
+        .tag.earth-like {
+            background: rgba(30, 144, 255, 0.2);
+            color: #1e90ff;
+        }
+
+        .tag.gas {
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffa500;
+        }
+
+        .view-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn:hover {
+            background: rgba(0, 191, 255, 0.1);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+
+        .page-btn, .next-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn:hover, .next-btn:hover {
+            background: rgba(0, 191, 255, 0.2);
+            border-color: var(--primary);
+        }
+
+        .page-btn.active {
+            background: var(--primary);
+            color: #000;
+        }
+
+        /* Blog Page Styles */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-card.featured {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .blog-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .blog-card.featured .blog-image {
+            height: 100%;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-category {
+            font-size: 0.8rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .blog-excerpt {
+            margin: 1rem 0;
+            color: var(--text-secondary);
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .newsletter-signup {
+            margin-top: 4rem;
+            text-align: center;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 1rem auto 0;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 4px 0 0 4px;
+            border-right: none;
+        }
+
+        .newsletter-form button {
+            padding: 0 1.5rem;
+            background: var(--primary);
+            border: none;
+            border-radius: 0 4px 4px 0;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Page Transitions */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: 1rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .planet-grid, .gallery-grid, .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-card.featured {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-controls {
+                flex-direction: column;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                width: 100%;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1>🌌 Planet SHOP</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="gallery">Gallery</a></li>
+                <li><a href="#" class="nav-link" data-page="blog">Blog</a></li>
+                <li><a href="#" class="nav-link" data-page="about">About</a></li>
+                <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+                <li><a href="#cart" class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1 class="hero-title">Own Your Own Planet</h1>
+                    <p class="hero-subtitle">Discover extraordinary worlds from across the galaxy. Premium planets for the discerning cosmic explorer.</p>
+                    <button class="btn" onclick="document.querySelector('.nav-link[data-page=\"gallery\"]').click()">Explore Planets</button>
+                </div>
+                <div class="hero-background">
+                    <div class="star star-1" style="--duration: 3s; top: 20%; left: 10%; width: 2px; height: 2px;"></div>
+                    <div class="star star-2" style="--duration: 4s; top: 60%; left: 80%; width: 3px; height: 3px;"></div>
+                    <div class="star star-3" style="--duration: 2.5s; top: 40%; left: 50%; width: 1px; height: 1px;"></div>
+                    <div class="star star-4" style="--duration: 5s; top: 80%; left: 30%; width: 2px; height: 2px;"></div>
+                    <div class="star star-5" style="--duration: 3.5s; top: 30%; left: 70%; width: 1px; height: 1px;"></div>
+                </div>
+            </section>
+
+            <!-- Featured Planets Section -->
+            <section class="planets-section">
+                <div class="container">
+                    <h2 class="section-title">Featured Planets</h2>
+                    <p class="section-subtitle">Handpicked celestial bodies from the finest corners of the universe</p>
+                    
+                    <div class="planet-grid">
+                        <!-- Planet 1 -->
+                        <div class="planet-card" data-planet="earth-like">
+                            <div class="planet-image">
+                                <div class="planet earth-like"></div>
+                                <div class="planet-glow"></div>
+                            </div>
+                            <div class="planet-info">
+                                <h3>Kepler-442b</h3>
+                                <p class="planet-type">Earth-like • Habitable Zone</p>
+                                <p class="planet-description">A stunning blue-green world with vast oceans and continents. Perfect for establishing a new civilization.</p>
+                                <div class="planet-specs">
+                                    <span>🌡️ 15°C avg</span>
+                                    <span>🌊 70% water</span>
+                                    <span>🏔️ 3 continents</span>
+                                </div>
+                                <div class="planet-price">
+                                    <span class="price">$2.5M</span>
+                                    <span class="currency">Galactic Credits</span>
+                                </div>
+                                <button class="add-to-cart" onclick="addToCart('Kepler-442b', 2500000)">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <!-- Planet 2 -->
+                        <div class="planet-card" data-planet="gas-giant">
+                            <div class="planet-image">
+                                <div class="planet gas-giant"></div>
+                                <div class="planet-glow"></div>
+                            </div>
+                            <div class="planet-info">
+                                <h3>Neptune Prime</h3>
+                                <p class="planet-type">Gas Giant • Storm Systems</p>
+                                <p class="planet-description">Majestic swirling storms and ethereal blue atmosphere. Comes with 12 natural satellites.</p>
+                                <div class="planet-specs">
+                                    <span>🌪️ 300 mph winds</span>
+                                    <span>🌙 12 moons</span>
+                                    <span>💎 Diamond rain</span>
+                                </div>
+                                <div class="planet-price">
+                                    <span class="price">$4.2M</span>
+                                    <span class="currency">Galactic Credits</span>
+                                </div>
+                                <button class="add-to-cart" onclick="addToCart('Neptune Prime', 4200000)">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <!-- Planet 3 -->
+                        <div class="planet-card" data-planet="desert">
+                            <div class="planet-image">
+                                <div class="planet desert"></div>
+                                <div class="planet-glow"></div>
+                            </div>
+                            <div class="planet-info">
+                                <h3>Arrakis II</h3>
+                                <p class="planet-type">Desert World • Mineral Rich</p>
+                                <p class="planet-description">Vast dunes of golden sand hide precious spice deposits. A treasure trove for the adventurous.</p>
+                                <div class="planet-specs">
+                                    <span>🏜️ Endless dunes</span>
+                                    <span>💰 Spice deposits</span>
+                                    <span>🌅 Twin suns</span>
+                                </div>
+                                <div class="planet-price">
+                                    <span class="price">$3.8M</span>
+                                    <span class="currency">Galactic Credits</span>
+                                </div>
+                                <button class="add-to-cart" onclick="addToCart('Arrakis II', 3800000)">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section class="about-section">
+                <div class="container">
+                    <div class="about-content">
+                        <h2 class="section-title">Why Choose Cosmic Shop?</h2>
+                        <div class="features-grid">
+                            <div class="feature">
+                                <div class="feature-icon">🚀</div>
+                                <h3>Fast Delivery</h3>
+                                <p>Wormhole express shipping to any location in the galaxy within 72 parsecs</p>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">🛡️</div>
+                                <h3>Quality Guarantee</h3>
+                                <p>All planets are thoroughly inspected and come with a 1000-year warranty</p>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">💫</div>
+                                <h3>Expert Curation</h3>
+                                <p>Handpicked by our team of cosmic explorers and astrophysicists</p>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">🌟</div>
+                                <h3>Financing Available</h3>
+                                <p>Flexible payment plans starting at just 100,000 credits per millennium</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="contact-section">
+                <div class="container">
+                    <h2 class="section-title">Contact Our Space Advisors</h2>
+                    <p class="section-subtitle">Ready to make the universe your home? Get in touch with our expert team.</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span class="contact-icon">📡</span>
+                            <div>
+                                <h3>Quantum Communication</h3>
+                                <p>frequency: 42.7 THz</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">🌌</span>
+                            <div>
+                                <h3>Galactic Address</h3>
+                                <p>Sector 7G, Milky Way Branch Office</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">⏰</span>
+                            <div>
+                                <h3>Operating Hours</h3>
+                                <p>24/7 Galactic Standard Time</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Gallery Page -->
+        <div id="gallery-page" class="page">
+            <section class="gallery-section">
+                <div class="container">
+                    <h1 class="section-title">Planet Gallery</h1>
+                    <p class="section-subtitle">Browse our extensive collection of celestial properties</p>
+                    
+                    <div class="filter-controls">
+                        <div class="filter-group">
+                            <label for="planet-type">Planet Type:</label>
+                            <select id="planet-type">
+                                <option value="all">All Types</option>
+                                <option value="earth-like">Earth-like</option>
+                                <option value="gas-giant">Gas Giant</option>
+                                <option value="desert">Desert</option>
+                                <option value="ice">Ice World</option>
+                                <option value="volcanic">Volcanic</option>
+                                <option value="jungle">Jungle World</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="price-range">Price Range:</label>
+                            <select id="price-range">
+                                <option value="all">Any Price</option>
+                                <option value="0-1">Under $1M</option>
+                                <option value="1-2">$1M - $2M</option>
+                                <option value="2-3">$2M - $3M</option>
+                                <option value="3-5">$3M - $5M</option>
+                                <option value="5+">Over $5M</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="habitability">Habitability:</label>
+                            <select id="habitability">
+                                <option value="all">Any</option>
+                                <option value="habitable">Human Habitable</option>
+                                <option value="terraforming">Terraforming Required</option>
+                                <option value="non-habitable">Non-Habitable</option>
+                            </select>
+                        </div>
+                        
+                        <button class="filter-btn" onclick="applyFilters()">Apply Filters</button>
+                    </div>
+                    
+                    <div class="gallery-grid">
+                        <!-- Expanded version of planet cards with more options -->
+                        <div class="gallery-planet-card" data-type="earth-like" data-price="2.5" data-habitability="habitable">
+                            <div class="planet-image">
+                                <div class="planet earth-like"></div>
+                            </div>
+                            <div class="planet-info">
+                                <h3>Kepler-442b</h3>
+                                <p class="planet-price">$2.5M</p>
+                                <div class="planet-tags">
+                                    <span class="tag habitable">Habitable</span>
+                                    <span class="tag earth-like">Earth-like</span>
+                                </div>
+                                <a href="#" class="view-btn">View Details</a>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-planet-card" data-type="gas-giant" data-price="4.2" data-habitability="non-habitable">
+                            <div class="planet-image">
+                                <div class="planet gas-giant"></div>
+                            </div>
+                            <div class="planet-info">
+                                <h3>Neptune Prime</h3>
+                                <p class="planet-price">$4.2M</p>
+                                <div class="planet-tags">
+                                    <span class="tag gas">Gas Giant</span>
+                                    <span class="tag stormy">Storm Systems</span>
+                                </div>
+                                <a href="#" class="view-btn">View Details</a>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-planet-card" data-type="desert" data-price="3.8" data-habitability="terraforming">
+                            <div class="planet-image">
+                                <div class="planet desert"></div>
+                            </div>
+                            <div class="planet-info">
+                                <h3>Arrakis II</h3>
+                                <p class="planet-price">$3.8M</p>
+                                <div class="planet-tags">
+                                    <span class="tag desert">Desert</span>
+                                    <span class="tag mineral">Mineral Rich</span>
+                                </div>
+                                <a href="#" class="view-btn">View Details</a>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-planet-card" data-type="ice" data-price="1.9" data-habitability="non-habitable">
+                            <div class="planet-image">
+                                <div class="planet ice"></div>
+                            </div>
+                            <div class="planet-info">
+                                <h3>Crystallia</h3>
+                                <p class="planet-price">$1.9M</p>
+                                <div class="planet-tags">
+                                    <span class="tag ice">Ice World</span>
+                                    <span class="tag crystals">Crystal Formations</span>
+                                </div>
+                                <a href="#" class="view-btn">View Details</a>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-planet-card" data-type="volcanic" data-price="3.1" data-habitability="non-habitable">
+                            <div class="planet-image">
+                                <div class="planet volcanic"></div>
+                            </div>
+                            <div class="planet-info">
+                                <h3>Vulcan's Forge</h3>
+                                <p class="planet-price">$3.1M</p>
+                                <div class="planet-tags">
+                                    <span class="tag volcanic">Volcanic</span>
+                                    <span class="tag energy">High Energy</span>
+                                </div>
+                                <a href="#" class="view-btn">View Details</a>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-planet-card" data-type="jungle" data-price="2.8" data-habitability="habitable">
+                            <div class="planet-image">
+                                <div class="planet jungle"></div>
+                            </div>
+                            <div class="planet-info">
+                                <h3>Pandora Verde</h3>
+                                <p class="planet-price">$2.8M</p>
+                                <div class="planet-tags">
+                                    <span class="tag jungle">Jungle</span>
+                                    <span class="tag bio">Biodiversity</span>
+                                </div>
+                                <a href="#" class="view-btn">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pagination">
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <span>...</span>
+                        <button class="page-btn">8</button>
+                        <button class="next-btn">Next →</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Blog Page -->
+        <div id="blog-page" class="page">
+            <section class="blog-section">
+                <div class="container">
+                    <h1 class="section-title">Cosmic News & Insights</h1>
+                    <p class="section-subtitle">Stay updated with the latest in planetary acquisitions and space exploration</p>
+                    
+                    <div class="blog-grid">
+                        <article class="blog-card featured">
+                            <div class="blog-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1454789548928-9efd52dc4031?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"></div>
+                            <div class="blog-content">
+                                <span class="blog-category">Technology</span>
+                                <h2>Breakthrough in Terraforming Technology</h2>
+                                <p class="blog-excerpt">Scientists at the Mars Institute have developed a new atmospheric processor that can transform barren worlds into habitable planets in just 50 years...</p>
+                                <div class="blog-meta">
+                                    <span class="date">June 12, 2025</span>
+                                    <span class="read-time">5 min read</span>
+                                </div>
+                                <a href="#" class="read-more">Read More →</a>
+                            </div>
+                        </article>
+                        
+                        <article class="blog-card">
+                            <div class="blog-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"></div>
+                            <div class="blog-content">
+                                <span class="blog-category">Finance</span>
+                                <h2>Why Planetary Real Estate is the Best Investment in 2025</h2>
+                                <p class="blog-excerpt">With Earth's resources dwindling, off-world properties have shown a 300% appreciation in value over the last decade. We analyze the market trends...</p>
+                                <div class="blog-meta">
+                                    <span class="date">June 5, 2025</span>
+                                    <span class="read-time">4 min read</span>
+                                </div>
+                                <a href="#" class="read-more">Read More →</a>
+                            </div>
+                        </article>
+                        
+                        <article class="blog-card">
+                            <div class="blog-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"></div>
+                            <div class="blog-content">
+                                <span class="blog-category">Discovery</span>
+                                <h2>10 New Exoplanets Added to Our Catalog</h2>
+                                <p class="blog-excerpt">Our deep space probes have identified 10 new potentially habitable worlds in the Andromeda sector, including one with bioluminescent forests...</p>
+                                <div class="blog-meta">
+                                    <span class="date">May 28, 2025</span>
+                                    <span class="read-time">6 min read</span>
+                                </div>
+                                <a href="#" class="read-more">Read More →</a>
+                            </div>
+                        </article>
+                        
+                        <article class="blog-card">
+                            <div class="blog-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1506443432602-ac2fcd6f54e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"></div>
+                            <div class="blog-content">
+                                <span class="blog-category">Lifestyle</span>
+                                <h2>Living on Kepler-442b: A Colonist's Diary</h2>
+                                <p class="blog-excerpt">One year after purchasing Kepler-442b through our shop, the Williamson family shares their experiences establishing the first private colony...</p>
+                                <div class="blog-meta">
+                                    <span class="date">May 15, 2025</span>
+                                    <span class="read-time">8 min read</span>
+                                </div>
+                                <a href="#" class="read-more">Read More →</a>
+                            </div>
+                        </article>
+                        
+                        <article class="blog-card">
+                            <div class="blog-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"></div>
+                            <div class="blog-content">
+                                <span class="blog-category">Legal</span>
+                                <h2>Intergalactic Property Law: What You Need to Know</h2>
+                                <p class="blog-excerpt">Navigating the complex legal landscape of planetary ownership can be daunting. Our legal experts break down the essential considerations...</p>
+                                <div class="blog-meta">
+                                    <span class="date">May 3, 2025</span>
+                                    <span class="read-time">7 min read</span>
+                                </div>
+                                <a href="#" class="read-more">Read More →</a>
+                            </div>
+                        </article>
+                        
+                        <article class="blog-card">
+                            <div class="blog-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"></div>
+                            <div class="blog-content">
+                                <span class="blog-category">Sustainability</span>
+                                <h2>Sustainable Planet Management: Best Practices</h2>
+                                <p class="blog-excerpt">How to maintain your new planet's ecosystems while developing its resources responsibly. Learn from successful planetary stewards...</p>
+                                <div class="blog-meta">
+                                    <span class="date">April 22, 2025</span>
+                                    <span class="read-time">5 min read</span>
+                                </div>
+                                <a href="#" class="read-more">Read More →</a>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <div class="newsletter-signup">
+                        <h3>Subscribe to Cosmic Updates</h3>
+                        <p>Get the latest planet listings, space news, and exclusive offers delivered to your inbox</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Your email address" required>
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Page (Placeholder) -->
+        <div id="about-page" class="page">
+            <section class="about-page-section">
+                <div class="container">
+                    <h1 class="section-title">About Cosmic Planet Shop</h1>
+                    <p class="section-subtitle">Our mission to make the universe accessible to everyone</p>
+                    <div class="about-page-content">
+                        <p>Coming soon...</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Page (Placeholder) -->
+        <div id="contact-page" class="page">
+            <section class="contact-page-section">
+                <div class="container">
+                    <h1 class="section-title">Contact Us</h1>
+                    <p class="section-subtitle">Reach out to our cosmic real estate agents</p>
+                    <div class="contact-page-content">
+                        <p>Coming soon...</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Cosmic Cart</h2>
+                <span class="close" onclick="closeCart()">&times;</span>
+            </div>
+            <div id="cart-items" class="cart-items">
+                <p class="empty-cart">Your cart is empty. Start exploring the cosmos!</p>
+            </div>
+            <div class="cart-total">
+                <h3>Total: <span id="cart-total">0</span> Galactic Credits</h3>
+                <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Cosmic Planet Shop. Licensed by the Intergalactic Commerce Authority.</p>
+            <p>⚠️ Planets may contain undiscovered life forms. Purchase at your own cosmic risk.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Cart functionality
+        let cart = [];
+        let cartCount = 0;
+
+        function addToCart(planetName, price) {
+            cart.push({ name: planetName, price: price });
+            cartCount++;
+            document.getElementById('cart-count').textContent = cartCount;
+            
+            // Visual feedback
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Added!';
+            button.style.background = '#10b981';
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '';
+            }, 1000);
+        }
+
+        function openCart() {
+            const modal = document.getElementById('cart-modal');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="empty-cart">Your cart is empty. Start exploring the cosmos!</p>';
+                cartTotal.textContent = '0';
+            } else {
+                let itemsHTML = '';
+                let total = 0;
+                cart.forEach((item, index) => {
+                    itemsHTML += `
+                        <div class="cart-item">
+                            <span>${item.name}</span>
+                            <span>${item.price.toLocaleString()} Credits</span>
+                            <button onclick="removeFromCart(${index})">Remove</button>
+                        </div>
+                    `;
+                    total += item.price;
+                });
+                cartItems.innerHTML = itemsHTML;
+                cartTotal.textContent = total.toLocaleString();
+            }
+            modal.style.display = 'block';
+        }
+
+        function closeCart() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            cartCount--;
+            document.getElementById('cart-count').textContent = cartCount;
+            openCart(); // Refresh cart display
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            alert('Thank you for your purchase! Your planets will be delivered via wormhole express within 72 parsecs.');
+            cart = [];
+            cartCount = 0;
+            document.getElementById('cart-count').textContent = cartCount;
+            closeCart();
+        }
+
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Filter functionality for gallery
+        function applyFilters() {
+            const typeFilter = document.getElementById('planet-type').value;
+            const priceFilter = document.getElementById('price-range').value;
+            const habitabilityFilter = document.getElementById('habitability').value;
+            
+            document.querySelectorAll('.gallery-planet-card').forEach(card => {
+                const type = card.getAttribute('data-type');
+                const price = parseFloat(card.getAttribute('data-price'));
+                const habitability = card.getAttribute('data-habitability');
+                
+                let typeMatch = typeFilter === 'all' || type === typeFilter;
+                let priceMatch = priceFilter === 'all' || 
+                    (priceFilter === '0-1' && price < 1) ||
+                    (priceFilter === '1-2' && price >= 1 && price < 2) ||
+                    (priceFilter === '2-3' && price >= 2 && price < 3) ||
+                    (priceFilter === '3-5' && price >= 3 && price < 5) ||
+                    (priceFilter === '5+' && price >= 5);
+                let habitabilityMatch = habitabilityFilter === 'all' || habitability === habitabilityFilter;
+                
+                if (typeMatch && priceMatch && habitabilityMatch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize star animations
+            for (let i = 6; i <= 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.width = (Math.random() * 3 + 1) + 'px';
+                star.style.height = star.style.width;
+                star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+                document.querySelector('.hero-background').appendChild(star);
+            }
+            
+            // Cart button click
+            document.querySelector('.cart-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                openCart();
+            });
+            
+            // Navigation links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page') + '-page';
+                    showPage(pageId);
+                    
+                    // Update active nav link
+                    document.querySelectorAll('.nav-link').forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                const modal = document.getElementById('cart-modal');
+                if (e.target === modal) {
+                    closeCart();
+                }
+            });
+            
+            // Pagination buttons
+            document.querySelectorAll('.page-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    // In a real app, this would load the corresponding page
+                });
+            });
+            
+            // Newsletter form
+            document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input').value;
+                alert(`Thanks for subscribing with ${email}! You'll receive our cosmic updates soon.`);
+                this.querySelector('input').value = '';
+            });
+        });
+    </script>
+</body>
+</html>
